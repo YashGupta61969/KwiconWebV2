@@ -1,0 +1,162 @@
+.chat_wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.chat_container {
+	flex: 1;
+	display: flex;
+	gap: 1rem;
+	min-height: 0;
+}
+
+.chat_body {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	width: 63%;
+}
+
+/* Sidebar */
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.chat_coversations {
+	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+	scroll-behavior: smooth;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.chat_coversations::-webkit-scrollbar {
+	width: 6px;
+}
+
+.chat_coversations::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.chat_coversations::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+
+.chat_input {
+	background: transparent;
+	border: none;
+	width: 100%;
+	border-radius: 0px;
+	padding-top: 16px;
+	padding-bottom: 0px;
+	font-family: 'Open Sans';
+	resize: none;
+}
+.chat_input:focus {
+	outline: none;
+	border: none;
+}
+.chat_input::placeholder {
+	font-size: 0.8rem;
+	color: rgba(10, 13, 70, 0.45);
+	letter-spacing: 1px;
+}
+
+/* message */
+.messages-container {
+	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+	/* scroll-behavior: smooth; */
+}
+/* For Webkit browsers (Chrome, Safari) */
+.messages-container::-webkit-scrollbar {
+	width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+
+.message-content {
+	text-align: left;
+	position: relative;
+}
+
+.left {
+	text-align: 'left';
+}
+.right {
+	text-align: right;
+}
+.message-options {
+	display: flex;
+	left: 0;
+	z-index: 100;
+	border-radius: 0.5rem;
+	left: 73%;
+	top: -35px;
+	/* opacity: 0; */
+	/* visibility: 0; */
+	/* transition: opacity 0.1s ease-in-out; */
+}
+
+.show-options .message-options {
+	opacity: 1;
+	/* visibility: 100; */
+}
+
+.chat-date-indicator {
+	text-align: center;
+	font-size: 14px;
+	color: #777777;
+	margin-bottom: 16px;
+}
+
+.chat-date-indicator::before,
+.chat-date-indicator::after {
+	content: '';
+	display: inline-block;
+	width: 30%;
+	vertical-align: middle;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.chat-date-indicator::before {
+	margin-right: 2.5em;
+}
+
+.chat-date-indicator::after {
+	margin-left: 2.5em;
+}
+
+.chat-date-indicator span {
+	display: inline-block;
+	position: relative;
+	top: -0.5em;
+	background-color: #ffffff;
+	padding: 0 8px;
+}
+
+/* check if the inner text value is a link or not */
+.message-content a {
+	color: #2e3ee5;
+	text-decoration: none;
+}
+
+.header-search-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	padding: 0.25rem 0;
+	border: 1px solid #7581ff;
+}

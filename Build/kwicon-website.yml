@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kwicon-website
+  name: kwicon-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kwicon-website
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kwicon-website
+    spec:
+      containers:
+      - image: tcr.techdome.io/kwicon-website:_BUILD__ID_
+        name: kwicon-website
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: tcr-secret
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kwicon-website
+  labels:
+    run: kwicon-website
+spec:
+  type: ClusterIP
+  selector:
+    app: kwicon-website
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

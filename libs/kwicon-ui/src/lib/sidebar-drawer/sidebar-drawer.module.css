@@ -1,0 +1,42 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	/* height: calc(100vh - 60px); */
+	padding: 10px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.sidebar-active-style {
+	display: block;
+	background-color: #7581ff;
+	padding: 0.625rem;
+	margin: 0.5rem 0;
+	color: #f7f8fc;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+}
+
+.sidebar-inactive-style {
+	display: block;
+	background-color: #f9f9f9;
+	padding: 0.625rem;
+	color: #464b80;
+	margin: 0.5rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+}

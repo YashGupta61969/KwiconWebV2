@@ -1,0 +1,18 @@
+export const thunkString = {
+	getUser: 'onboarding/getUser',
+	setUserRole: 'onboarding/setUserRole',
+	setUserProfileForm: 'onboarding/setUserProfileForm',
+	setUserProfilePicture: 'onboarding/setUserProfilePicture',
+	deleteUserProfilePicture: 'onboarding/deleteUserProfilePicture',
+	getOnboardingCategories: 'onboarding/getOnboardingCategories',
+	setUserInterests: 'onboarding/setUserInterests',
+	getSubCategoriesByCategories: 'onboarding/getSubCategoriesByCategories',
+	getAdvisorsByCategoryId: 'onboarding/getAdvisorsByCategoryId',
+	getAllAdvisors: 'onboarding/getAllAdvisors',
+	getCommunity: 'onboarding/getCommunity',
+	joinOrWithdrawCommunity: 'onboarding/joinOrWithdrawCommunity',
+	setUserProfileCV: 'onboarding/setUserProfileCV',
+	deleteUserProfileCV: 'onboarding/deleteUserProfileCV',
+	getGrades: 'onboarding/getGrades',
+	addCategory: 'onboarding/addCategory',
+};

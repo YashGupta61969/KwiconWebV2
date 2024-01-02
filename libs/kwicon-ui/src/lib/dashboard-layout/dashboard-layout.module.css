@@ -1,0 +1,35 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.dashboard-layout__container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.dashboard-layout__main-contant {
+	display: flex;
+	flex: 1;
+	overflow: hidden;
+}
+
+.main__content {
+	position: relative;
+	flex: 1;
+	overflow-y: auto;
+}
+
+.main__outer-container {
+	display: flex;
+	justify-content: center;
+	padding: 0 !important;
+}
+
+.main__inner-container {
+	width: 1140px;
+}

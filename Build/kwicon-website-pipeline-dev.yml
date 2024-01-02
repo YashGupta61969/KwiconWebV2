@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+      - development
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: kwicon-website
+    pool:
+      name: techdome_onprem
+      demands:
+      - agent.name -equals ubuntuagent  
+
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'TCR'
+        repository: 'kwicon-website'
+        command: 'build'
+        Dockerfile: '$(Build.Repository.LocalPath)/apps/kwicon-website/Dockerfile'
+        buildContext: '$(Build.Repository.LocalPath)/'
+        arguments: '--build-arg API_URL=$(VITEAPIURL) --build-arg IMAGE_SAS_TOKEN=$(VITEIMAGESASTOKEN) --build-arg APP_AUTH0_DOMAIN=$(VITEAPPAUTH0DOMAIN) --build-arg APP_AUTH0_CLIENT_ID=$(VITEAPPAUTH0CLIENTID) --build-arg APP_URL=https://app-kwicon.techdome.io/ --build-arg WEBSITE_URL=$(VITEWEBSITEURL)'
+        
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'TCR'
+        repository: 'kwicon-website'
+        command: 'push'
+    - task: CopyFiles@2
+      displayName: Copy build manifests
+      inputs:
+        Contents: 'Build/kwicon-website.yml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish build manifests
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Build/kwicon-website.yml'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

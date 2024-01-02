@@ -1,0 +1,25 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+
+*/
+.main-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	padding: 1rem 1rem;
+}
+
+.sub-container-2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+
+.sub-container-3 {
+	opacity: 0.5;
+	font-size: 12px;
+	font-weight: 400;
+}

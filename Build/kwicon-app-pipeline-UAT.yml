@@ -1,0 +1,47 @@
+trigger:
+  branches:
+    include:
+      - UAT
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: kwicon
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'ACR'
+        repository: 'kwicon-app'
+        command: 'build'
+        Dockerfile: '$(Build.Repository.LocalPath)/apps/kwicon-app/Dockerfile'
+        buildContext: '$(Build.Repository.LocalPath)/'
+        arguments: '--build-arg API_URL=https://kwiconapi-uat.techdomeaks.com/api/v2/ --build-arg IMAGE_SAS_TOKEN=$(VITEIMAGESASTOKEN) --build-arg APP_AUTH0_DOMAIN=dev-ljc83qoofj2auuhg.us.auth0.com --build-arg APP_AUTH0_CLIENT_ID=fI0BqRqnS2BnhXPn1pJ1pJZLd2wQuWwL --build-arg WEBSITE_URL=https://kwicon.com/ --build-arg QB_APP_ID=$(QBAPPID) --build-arg QB_AUTH_KEY=$(QBAUTHKEY) --build-arg QB_AUTH_SECRET=$(QBAUTHSECRET) --build-arg QB_ACCOUNT_KEY=$(QBACCOUNTKEY)'
+        
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'ACR'
+        repository: 'kwicon-app'
+        command: 'push'
+    - task: CopyFiles@2
+      displayName: Copy build manifests
+      inputs:
+        Contents: 'Build/kwicon-app-UAT.yml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish build manifests
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Build/kwicon-app-UAT.yml'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

@@ -1,0 +1,56 @@
+.onboarding-container__header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.change-role-container__header {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+
+.onboarding-container__footer {
+	position: fixed !important;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 1000;
+	background-color: #fff;
+}
+
+.onboarding-container__footer > .onboarding-container__footer-inner {
+	display: flex;
+	align-items: center;
+}
+
+.onboarding-container__role-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.onboarding-container__role-selector-card {
+	display: flex;
+	justify-content: space-between;
+	/* align-items: center; */
+	cursor: pointer;
+}
+
+.onboarding-container__step-count-tracker {
+	background-color: red;
+	color: red;
+}
+
+.onboarding-container__content {
+	/* add a proportionate height */
+	height: calc(100vh - 52vh);
+	overflow-y: scroll;
+	cursor: all-scroll;
+}
+
+/* hide scroll bar for this content */
+.onboarding-container__content::-webkit-scrollbar {
+	display: none;
+}

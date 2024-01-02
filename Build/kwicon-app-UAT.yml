@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kwicon-app
+  name: kwicon-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kwicon-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kwicon-app
+    spec:
+      containers:
+      - image: kwiconapps.azurecr.io/kwicon-app:_BUILD__ID_
+        name: kwicon-app
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kwicon-app
+  labels:
+    run: kwicon-app
+spec:
+  type: ClusterIP
+  selector:
+    app: kwicon-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

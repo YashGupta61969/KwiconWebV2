@@ -1,0 +1,70 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.user-detail__title {
+	margin: 0;
+}
+
+.education__item {
+	display: flex;
+	justify-content: space-between;
+	/* align-items: center; */
+	gap: 1rem;
+}
+
+.textarea {
+	resize: none;
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: inherit;
+	font-weight: 400;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.textarea:focus {
+	outline: none;
+}
+
+textarea::placeholder {
+	color: inherit;
+	font-weight: 400;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+	color: rgba(70, 75, 128, 0.4);
+}
+
+/* Country code select form */
+.country_code_wrapper {
+	/* display: flex;
+	flex-direction: column; */
+}
+
+/* style={{ flex: 1, overflowY: 'scroll' }} */
+.country_code_items {
+	height: 450px;
+	overflow-y: scroll;
+}
+
+.country_code_items::-webkit-scrollbar {
+	width: 10px; /* width of the scrollbar */
+}
+
+.country_code_items::-webkit-scrollbar-track {
+	background: #f1f1f1; /* color of the track */
+}
+
+.country_code_items::-webkit-scrollbar-thumb {
+	background: #dfdbdb; /* color of the thumb */
+	border-radius: 200px;
+}
+
+.country_code_items::-webkit-scrollbar-thumb:hover {
+	background: #dfdbdb; /* color of the thumb on hover */
+}

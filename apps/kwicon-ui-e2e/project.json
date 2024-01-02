@@ -1,0 +1,30 @@
+{
+	"name": "kwicon-ui-e2e",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/kwicon-ui-e2e/src",
+	"projectType": "application",
+	"targets": {
+		"e2e": {
+			"executor": "@nrwl/cypress:cypress",
+			"options": {
+				"cypressConfig": "apps/kwicon-ui-e2e/cypress.config.ts",
+				"devServerTarget": "kwicon-ui:storybook",
+				"testingType": "e2e"
+			},
+			"configurations": {
+				"ci": {
+					"devServerTarget": "kwicon-ui:storybook:ci"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/kwicon-ui-e2e/**/*.{js,ts}"]
+			}
+		}
+	},
+	"tags": [],
+	"implicitDependencies": ["kwicon-ui"]
+}

@@ -1,0 +1,48 @@
+trigger:
+  branches:
+    include:
+      - master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Kwiconapp
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'kwiconprod'
+        repository: 'kwicon-app'
+        command: 'build'
+        Dockerfile: '$(Build.Repository.LocalPath)/apps/kwicon-app/Dockerfile'
+        buildContext: '$(Build.Repository.LocalPath)/'
+        # arguments: '--build-arg API_URL=$(VITEAPIURL) --build-arg IMAGE_SAS_TOKEN=$(VITEIMAGESASTOKEN) --build-arg APP_AUTH0_DOMAIN=$(VITEAPPAUTH0DOMAIN) --build-arg APP_AUTH0_CLIENT_ID=$(VITEAPPAUTH0CLIENTID) --build-arg APP_URL=$(VITEAPPURL) --build-arg WEBSITE_URL=$(VITEWEBSITEURL)'
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'kwiconprod'
+        repository: 'kwicon-app'
+        command: 'push'
+        
+
+    - task: CopyFiles@2
+      displayName: Copy build manifests
+      inputs:
+        Contents: 'Build/kwicon-app-prod.yml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish build manifests
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Build/kwicon-app-prod.yml'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

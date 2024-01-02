@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+      - development
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Kwicon-app
+    pool:
+      name: techdome_onprem
+      demands:
+      - agent.name -equals ubuntuagent  
+
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'TCR'
+        repository: 'kwicon-app'
+        command: 'build'
+        Dockerfile: '$(Build.Repository.LocalPath)/apps/kwicon-app/Dockerfile'
+        buildContext: '$(Build.Repository.LocalPath)/'
+        arguments: '--build-arg API_URL=https://kwicondev.techdome.io/api/v2 --build-arg IMAGE_SAS_TOKEN=$(VITEIMAGESASTOKEN) --build-arg APP_AUTH0_DOMAIN=dev-ljc83qoofj2auuhg.us.auth0.com --build-arg APP_AUTH0_CLIENT_ID=fI0BqRqnS2BnhXPn1pJ1pJZLd2wQuWwL --build-arg WEBSITE_URL=https://web-kwicon.techdome.io/ --build-arg QB_APP_ID=$(QBAPPID) --build-arg QB_AUTH_KEY=$(QBAUTHKEY) --build-arg QB_AUTH_SECRET=$(QBAUTHSECRET) --build-arg APP_URL=https://app-kwicon.techdome.io/ --build-arg QB_ACCOUNT_KEY=$(QBACCOUNTKEY) --build-arg QB_CHAT_MODERATION_ENDPOINT=$(MODERATION_ENDPOINT) --build-arg COMMUNICATION_SERVICES_ENDPOINT=https://techdome-chat-poc-acs.india.communication.azure.com/'
+        
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'TCR'
+        repository: 'kwicon-app'
+        command: 'push'
+    - task: CopyFiles@2
+      displayName: Copy build manifests
+      inputs:
+        Contents: 'Build/kwicon-app.yml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish build manifests
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Build/kwicon-app.yml'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

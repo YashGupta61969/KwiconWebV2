@@ -1,0 +1,50 @@
+.home-container {
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
+	margin-top: 1rem;
+}
+
+.post-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 2rem;
+	width: 60%;
+	height: 87vh;
+	scroll-behavior: smooth;
+	overflow-y: scroll;
+}
+
+.post-container::-webkit-scrollbar {
+	display: none;
+}
+
+.post-heading:hover {
+	cursor: pointer;
+	color: #2e3ee5;
+	text-decoration: underline;
+}
+
+.textarea {
+	resize: none;
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: inherit;
+	font-weight: 400;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.textarea:focus {
+	outline: none;
+}
+
+textarea::placeholder {
+	color: inherit;
+	font-weight: 400;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+	color: rgba(70, 75, 128, 0.4);
+}

@@ -1,0 +1,13 @@
+html,
+body {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1rem;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
